@@ -19,7 +19,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Jika login berhasil
-            return redirect()->intended('dashboard');
+            return redirect()->route('dashboard');
         }
 
         // Jika login gagal
