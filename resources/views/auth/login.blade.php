@@ -5,6 +5,11 @@
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="slide navbar style.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" type="text/css" href="slide navbar style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+
     <style>
         body {
             margin: 0;
@@ -111,27 +116,30 @@
 </head>
 
 <body>
+
     <div class="main">
         <input type="checkbox" id="chk" aria-hidden="true">
 
         @if ($errors->any())
-        <div>
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+            <div>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
 
+        <!-- Form Registrasi -->
         <div class="signup">
-            <form>
+            <form method="POST" action="{{ url('register') }}">
+                @csrf
                 <label for="chk" aria-hidden="true">Daftar</label>
-                <input type="text" name="txt" placeholder="User name" required="">
-                <input type="email" name="email" placeholder="Email" required="">
-                <input type="number" name="broj" placeholder="BrojTelefona" required="">
-                <input type="password" name="pswd" placeholder="Password" required="">
-                <button>Sign up</button>
+                <input type="text" name="name" placeholder="Username" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required>
+                <button type="submit">Sign up</button>
             </form>
         </div>
 
@@ -146,5 +154,19 @@
         </div>
     </div>
 </body>
+
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- SweetAlert Script -->
+<script>
+    @if (session('success'))
+        Swal.fire({
+            title: "Good job!",
+            text: "{{ session('success') }}",
+            icon: "success"
+        });
+    @endif
+</script>
 
 </html>
