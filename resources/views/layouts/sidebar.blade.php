@@ -3,7 +3,8 @@
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">
-                    <a href="{{ route('dashboard') }}"><img src="{{ asset('mazer/assets/images/logo/logo.png') }}" alt="Logo"></a>
+                    <a href="{{ route('dashboard') }}"><img src="{{ asset('mazer/assets/images/logo/logo.png') }}"
+                            alt="Logo"></a>
                 </div>
                 <div class="toggler">
                     <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -39,6 +40,14 @@
                         <span>Kelola Jadwal Interview</span>
                     </a>
                 </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+
+
             </ul>
         </div>
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
