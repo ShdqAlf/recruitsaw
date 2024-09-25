@@ -22,6 +22,7 @@ class LowonganController extends Controller
             'lokasi' => 'required',
             'tanggal_dibuka' => 'required|date',
             'tanggal_ditutup' => 'required|date',
+            'tipe_kerja' => 'required|in:kontrak,paruh_waktu,full_time,magang',
         ]);
 
         Lowongan::create($request->all());
@@ -39,6 +40,7 @@ class LowonganController extends Controller
             'lokasi' => 'required',
             'tanggal_dibuka' => 'required|date',
             'tanggal_ditutup' => 'required|date',
+            'tipe_kerja' => 'required|in:kontrak,paruh_waktu,full_time,magang',
         ]);
 
         $lowongan->update($request->all());

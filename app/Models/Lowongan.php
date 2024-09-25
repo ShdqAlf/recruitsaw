@@ -14,5 +14,6 @@ class Lowongan extends Model
         'lokasi',
         'tanggal_dibuka',
         'tanggal_ditutup',
+        'tipe_kerja', 
     ];
 }
