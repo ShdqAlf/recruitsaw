@@ -25,9 +25,9 @@ Route::get('/', function () {
     if (Auth::check()) {
         // Redirect ke dashboard berdasarkan role jika sudah login
         $role = auth()->user()->role;
-        if ($role === 'admin') {
+        if ($role === 'Admin') {
             return redirect()->route('dashboard');
-        } elseif ($role === 'user') {
+        } elseif ($role === 'User') {
             return redirect()->route('user.dashboard');
         }
     }
@@ -47,10 +47,10 @@ Route::middleware('guest')->group(function () {
 });
 
 // Rute logout (untuk logout pengguna yang sudah login)
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 // Rute untuk admin yang sudah login
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/manage/jobs', [LowonganController::class, 'index'])->name('manage.jobs');
     Route::get('/manage/applicants', [DataPelamarController::class, 'index'])->name('manage.applicants');
@@ -59,7 +59,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 // Rute untuk user yang sudah login
-Route::middleware(['auth', 'role:user'])->group(function () {
+Route::middleware(['auth', 'role:User'])->group(function () {
     Route::get('/user/dashboard', function () {
         return view('user.dashboard'); // Pastikan view 'user.dashboard' ada
     })->name('user.dashboard');
