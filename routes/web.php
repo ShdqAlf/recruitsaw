@@ -34,33 +34,28 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-// Rute login dan register (hanya bisa diakses oleh guest)
-Route::middleware('guest')->group(function () {
-    Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('login', [AuthController::class, 'login']);
+// Rute login dan register (bisa diakses oleh guest)
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
+Route::get('register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('register', [AuthController::class, 'register']);
+Route::post('register', [AuthController::class, 'register'])->name('register.submit');
 
-    Route::get('register', [AuthController::class, 'showRegisterForm'])->name('register');
-    Route::post('register', [AuthController::class, 'register']);
 
-    // Rute tambahan jika guest ingin mengakses home (halaman utama)
-    Route::get('home', [HomeController::class, 'home'])->name('home');
-});
-
-// Rute logout (untuk logout pengguna yang sudah login)
+// Rute logout
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/perform-logout', [AuthController::class, 'logout'])->name('logout');
 
-// Rute untuk admin yang sudah login
-Route::middleware(['auth', 'role:Admin'])->group(function () {
-    Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-    Route::get('/manage/jobs', [LowonganController::class, 'index'])->name('manage.jobs');
-    Route::get('/manage/applicants', [DataPelamarController::class, 'index'])->name('manage.applicants');
-    Route::get('/manage/interviews', [JadwalController::class, 'index'])->name('manage.interviews');
-    Route::resource('lowongans', LowonganController::class);
-});
+// Rute yang bisa diakses oleh admin dan user tanpa middleware role
+Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('/manage/jobs', [LowonganController::class, 'index'])->name('manage.jobs');
+Route::get('/manage/applicants', [DataPelamarController::class, 'index'])->name('manage.applicants');
+Route::get('/manage/interviews', [JadwalController::class, 'index'])->name('manage.interviews');
+Route::resource('lowongans', LowonganController::class);
+Route::get('/pelamars/{id}/evaluate', [DataPelamarController::class, 'evaluate'])->name('pelamars.evaluate');
+Route::post('/pelamars/{id}/confirm', [DataPelamarController::class, 'confirm'])->name('pelamars.confirm');
 
-// Rute untuk user yang sudah login
-Route::middleware(['auth', 'role:User'])->group(function () {
-    Route::get('/user/dashboard', function () {
-        return view('user.dashboard'); // Pastikan view 'user.dashboard' ada
-    })->name('user.dashboard');
-});
+// Rute dashboard untuk user
+Route::get('/user/dashboard', function () {
+    return view('user.dashboard'); // Pastikan view 'user.dashboard' ada
+})->name('user.dashboard');

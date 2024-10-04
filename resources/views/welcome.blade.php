@@ -76,6 +76,7 @@
                         <!-- Header-btn -->
                         <div class="header-btns d-none d-lg-block f-right">
                             <a href="{{ route('login') }}" class="mr-40"><i class="ti-user"></i> Log in</a>
+                            <a href="{{ route('register') }}" class="mr-40"><i class="ti-user"></i> Register</a>
                             <a href="#" class="btn">Add Listing</a>
                         </div>
                         <!-- Mobile Menu -->
