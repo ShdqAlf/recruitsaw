@@ -1,76 +1,153 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register as a Job Applicant</title>
-    <!-- Link to Bootstrap CSS; adjust according to your directory structure -->
-    <link href="{{ asset('mazer/assets/css/bootstrap.css') }}" rel="stylesheet">
-    <!-- Link to Mazer CSS -->
-    <link href="{{ asset('mazer/assets/css/mazer.css') }}" rel="stylesheet">
-</head>
-<body>
-<div class="container mt-5">
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Register as a Job Applicant</div>
+                <div class="card-header">{{ __('Form Registrasi Kandidat') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register.submit') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" id="regForm">
                         @csrf
 
-                        <div class="mb-3">
-                            <label class="form-label">Name</label>
-                            <input type="text" class="form-control" name="name" required>
+                        <!-- Step 1: Profil -->
+                        <div class="tab">
+                            <h3>Profil Kandidat</h3>
+
+                            <!-- Nama Lengkap -->
+                            <div class="form-group">
+                                <label for="name">{{ __('Nama Lengkap') }}</label>
+                                <input type="text" class="form-control" name="name" value="{{ old('name') }}" required>
+                            </div>
+
+                            <!-- KTP -->
+                            <div class="form-group">
+                                <label for="ktp">{{ __('Nomor Induk Kependudukan (KTP)') }}</label>
+                                <input type="text" class="form-control" name="ktp" required>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label for="email">{{ __('Email') }}</label>
+                                <input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                            </div>
+
+                            <!-- Konfirmasi Email -->
+                            <div class="form-group">
+                                <label for="email-confirm">{{ __('Konfirmasi Email') }}</label>
+                                <input type="email" class="form-control" name="email_confirmation" required>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="form-group">
+                                <label for="password">{{ __('Password') }}</label>
+                                <input type="password" class="form-control" name="password" required>
+                            </div>
+
+                            <!-- Konfirmasi Password -->
+                            <div class="form-group">
+                                <label for="password-confirm">{{ __('Ulangi Password') }}</label>
+                                <input type="password" class="form-control" name="password_confirmation" required>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Email Address</label>
-                            <input type="email" class="form-control" name="email" required>
+                        <!-- Step 2: Alamat -->
+                        <div class="tab">
+                            <h3>Alamat Lengkap Domisili</h3>
+
+                            <div class="form-group">
+                                <label for="provinsi">{{ __('Provinsi') }}</label>
+                                <input type="text" class="form-control" name="provinsi" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kota">{{ __('Kabupaten / Kota') }}</label>
+                                <input type="text" class="form-control" name="kota" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kecamatan">{{ __('Kecamatan') }}</label>
+                                <input type="text" class="form-control" name="kecamatan" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="desa">{{ __('Desa / Kelurahan') }}</label>
+                                <input type="text" class="form-control" name="desa" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kode_pos">{{ __('Kode Pos') }}</label>
+                                <input type="text" class="form-control" name="kode_pos" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="status_rumah">{{ __('Status Rumah') }}</label>
+                                <select class="form-control" name="status_rumah" required>
+                                    <option value="Rumah Pribadi">Rumah Pribadi</option>
+                                    <option value="Sewa">Sewa</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" required>
+                        <!-- Step 3: Data Tambahan -->
+                        <div class="tab">
+                            <h3>Data Tambahan</h3>
+
+                            <div class="form-group">
+                                <label for="birthplace">{{ __('Tempat, Tanggal Lahir') }}</label>
+                                <input type="text" class="form-control" name="birthplace" value="Kota Tasikmalaya" required>
+                                <input type="date" class="form-control" name="birthdate" value="2003-01-04" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">{{ __('No. Ponsel') }}</label>
+                                <input type="text" class="form-control" name="phone" value="085156361450" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="whatsapp">{{ __('Whatsapp') }}</label>
+                                <input type="text" class="form-control" name="whatsapp" value="085156361450" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="status_pernikahan">{{ __('Status Pernikahan') }}</label>
+                                <select class="form-control" name="status_pernikahan" required>
+                                    <option value="Belum Menikah">Belum Menikah</option>
+                                    <option value="Menikah">Menikah</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="berat">{{ __('Berat') }}</label>
+                                <input type="text" class="form-control" name="berat" value="70" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tinggi">{{ __('Tinggi') }}</label>
+                                <input type="text" class="form-control" name="tinggi" value="175" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cv">{{ __('Upload CV') }}</label>
+                                <input type="file" class="form-control-file" name="cv" required>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" name="password_confirmation" required>
+                        <!-- Navigation buttons -->
+                        <div style="overflow:auto;">
+                            <div style="float:right;">
+                                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Sebelumnya</button>
+                                <button type="button" id="nextBtn" onclick="nextPrev(1)">Selanjutnya</button>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Phone</label>
-                            <input type="text" class="form-control" name="phone" required>
+                        <!-- Circles which indicates the steps of the form -->
+                        <div style="text-align:center;margin-top:40px;">
+                            <span class="step"></span>
+                            <span class="step"></span>
+                            <span class="step"></span>
                         </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Address</label>
-                            <input type="text" class="form-control" name="address" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Last Education</label>
-                            <input type="text" class="form-control" name="last_education" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Work History</label>
-                            <textarea class="form-control" name="work_history" required></textarea>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Upload Photo</label>
-                            <input type="file" class="form-control" name="photo" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Upload CV</label>
-                            <input type="file" class="form-control" name="cv" required>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Register</button>
                     </form>
                 </div>
             </div>
@@ -78,10 +155,70 @@
     </div>
 </div>
 
-<!-- Optional JavaScript; choose one of the two! -->
+<script>
+// Multi-step form logic
+var currentTab = 0;
+showTab(currentTab);
 
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="{{ asset('mazer/assets/js/bootstrap.bundle.min.js') }}"></script>
+function showTab(n) {
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
 
-</body>
-</html>
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Submit";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Selanjutnya";
+  }
+
+  fixStepIndicator(n);
+}
+
+function nextPrev(n) {
+  var x = document.getElementsByClassName("tab");
+
+  if (n == 1 && !validateForm()) return false;
+
+  x[currentTab].style.display = "none";
+  currentTab = currentTab + n;
+
+  if (currentTab >= x.length) {
+    document.getElementById("regForm").submit();
+    return false;
+  }
+
+  showTab(currentTab);
+}
+
+function validateForm() {
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+
+  for (i = 0; i < y.length; i++) {
+    if (y[i].value == "") {
+      y[i].className += " invalid";
+      valid = false;
+    }
+  }
+
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid;
+}
+
+function fixStepIndicator(n) {
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  x[n].className += " active";
+}
+</script>
+@endsection

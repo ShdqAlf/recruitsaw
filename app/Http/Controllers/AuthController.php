@@ -43,33 +43,29 @@ class AuthController extends Controller
     }
 
     public function register(Request $request)
-{
-    $request->validate([
-        'name' => 'required|max:255',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|min:8|confirmed',
-        'phone' => 'required',
-        'address' => 'required',
-        'last_education' => 'required',
-        'work_history' => 'required',
-        'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'cv' => 'required|mimes:pdf|max:2048'
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'ktp' => 'required|digits:16',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed',
+            'gender' => 'required',
+            'religion' => 'required',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    $user = new User();
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->password = Hash::make($request->password);
-    $user->phone = $request->phone;
-    $user->address = $request->address;
-    $user->last_education = $request->last_education;
-    $user->work_history = $request->work_history;
-    $user->photo = $request->file('photo')->store('public/photos');
-    $user->cv = $request->file('cv')->store('public/cvs');
-    $user->save();
+        $user = new User();
+        $user->name = $request->name;
+        $user->ktp = $request->ktp;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->gender = $request->gender;
+        $user->religion = $request->religion;
+        $user->photo = $request->file('photo')->store('public/photos');
+        $user->save();
 
-    Auth::login($user);
+        Auth::login($user);
 
-    return redirect()->route('dashboard')->with('success', 'Registration successful. Welcome!');
-}
+        return redirect()->route('dashboard')->with('success', 'Registration successful. Welcome!');
+    }
 }
