@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\LowonganController;
 use App\Http\Controllers\Admin\DataPelamarController;
 use App\Http\Controllers\Admin\JadwalController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LandingPageController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +33,8 @@ Route::get('/', function () {
             return redirect()->route('user.dashboard');
         }
     }
-    return view('welcome');
+    // Redirect ke method index di LandingPageController jika belum login
+    return app(LandingPageController::class)->index();
 })->name('welcome');
 
 // Rute login dan register (bisa diakses oleh guest)

@@ -90,48 +90,55 @@
         <!-- Header End -->
     </header>
     <main>
-        <!--? Hero Area Start-->
+        <!-- Hero Area Start-->
         <div class="slider-area hero-bg1 hero-overly">
-            <div class="single-slider hero-overly  slider-height1 d-flex align-items-center">
+            <div class="single-slider hero-overly slider-height1 d-flex align-items-center">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-10">
                             <!-- Hero Caption -->
-                            <div class="hero__caption pt-100">
-                                <h1>Explore Australia</h1>
-                                <p>Let's uncover the best places to eat, drink, and shop nearest to you.</p>
+                            <div class="hero__caption pt-100 text-center">
+                                <h1>E-Recruitment</h1>
+                                <p>Cari Pekerjaan Impianmu disini!</p>
                             </div>
-                            <!--Hero form -->
-                            <form action="#" class="search-box mb-100">
-                                <div class="input-form">
-                                    <input type="text" placeholder="What are you finding?">
+                            <!-- Hero form -->
+                            <form action="#" class="search-box mb-100 d-flex align-items-center">
+                                <div class="select-form me-2" style="width: 250px; max-width: 100%;">
+                                    <select name="location" id="select-location" class="form-select">
+                                        <option value="">Cari Lokasi</option>
+                                        @foreach ($lowongans as $lowongan)
+                                        <option value="{{ $lowongan->lokasi }}">{{ $lowongan->lokasi }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="select-form">
-                                    <div class="select-itms">
-                                        <select name="select" id="select1">
-                                            <option value="">In where?</option>
-                                            <option value="">Catagories One</option>
-                                            <option value="">Catagories Two</option>
-                                            <option value="">Catagories Three</option>
-                                            <option value="">Catagories Four</option>
-                                        </select>
-                                    </div>
+                                <div class="select-form me-2" style="width: 300px; max-width: 100%;">
+                                    <select name="company" id="select-company" class="form-select">
+                                        <option value="">Cari Perusahaan</option>
+                                        @foreach ($lowongans as $lowongan)
+                                        <option value="{{ $lowongan->perusahaan }}">{{ $lowongan->perusahaan }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="search-form">
-                                    <a href="#"><i class="ti-search"></i> Search</a>
+                                <div class="input-form me-2" style="width: 270px; max-width: 100%;">
+                                    <input type="text" placeholder="Cari Jobdesk" class="form-control">
+                                </div>
+                                <div class="search-form" style="width: 90px; max-width: 100%;">
+                                    <button type="submit" class="btn btn-search"><i class="ti-search"></i></button>
                                 </div>
                             </form>
-                            <!-- hero category1 img -->
+                            <!-- Hero category images (optional) -->
                             <div class="category-img text-center">
-                                <a href="listing.html"> <img src="{{ asset('assets/img/gallery/hero_category1.png') }}" alt=""></a>
-                                <a href="listing.html"> <img src="{{ asset('assets/img/gallery/hero_category2.png') }}" alt=""></a>
-                                <a href="listing.html"> <img src="{{ asset('assets/img/gallery/hero_category3.png') }}" alt=""></a>
+                                <div class="search-form">
+                                    <button type="submit" class="btn btn-search">Lihat Semua Jobdesk</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Hero Area End-->
+
         <!--Hero Area End-->
         <!--? Popular Locations Start 01-->
         <div class="popular-location border-bottom section-padding40">
