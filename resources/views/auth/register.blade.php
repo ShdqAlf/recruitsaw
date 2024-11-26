@@ -96,36 +96,36 @@
 
                             <div class="form-group">
                                 <label for="birthplace">{{ __('Tempat, Tanggal Lahir') }}</label>
-                                <input type="text" class="form-control" name="birthplace" value="Kota Tasikmalaya" required>
-                                <input type="date" class="form-control" name="birthdate" value="2003-01-04" required>
+                                <input type="text" class="form-control" name="birthplace" required>
+                                <input type="date" class="form-control" name="birthdate" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="phone">{{ __('No. Ponsel') }}</label>
-                                <input type="text" class="form-control" name="phone" value="085156361450" required>
+                                <input type="text" class="form-control" name="phone" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="whatsapp">{{ __('Whatsapp') }}</label>
-                                <input type="text" class="form-control" name="whatsapp" value="085156361450" required>
+                                <input type="text" class="form-control" name="whatsapp" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="status_pernikahan">{{ __('Status Pernikahan') }}</label>
                                 <select class="form-control" name="status_pernikahan" required>
-                                    <option value="Belum Menikah">Belum Menikah</option>
-                                    <option value="Menikah">Menikah</option>
+                                    <option>Belum Menikah</option>
+                                    <option>Menikah</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="berat">{{ __('Berat') }}</label>
-                                <input type="text" class="form-control" name="berat" value="70" required>
+                                <input type="text" class="form-control" name="berat" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="tinggi">{{ __('Tinggi') }}</label>
-                                <input type="text" class="form-control" name="tinggi" value="175" required>
+                                <input type="text" class="form-control" name="tinggi" required>
                             </div>
 
                             <div class="form-group">
